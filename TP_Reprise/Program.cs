@@ -10,7 +10,22 @@ namespace TP_Reprise
     {
         static void Main(string[] args)
         {
+            List<Prestation> listeTest = new List<Prestation>();
+            Prestation pres1 = new Prestation("test1", new DateTime(2023, 06, 12));
+            Prestation pres2 = new Prestation("test2", new DateTime(2023, 06, 12));
+            Prestation pres3 = new Prestation("test3", new DateTime(2023, 06, 13));
+            Prestation pres4 = new Prestation("test2", new DateTime(2023, 06, 12));
+            Prestation pres5 = new Prestation("test3", new DateTime(2023, 06, 13));
 
+            listeTest.Add(pres1);
+            listeTest.Add(pres2);
+            listeTest.Add(pres3);
+            listeTest.Add(pres4);
+
+            Dossier dossierTest = new Dossier("Clin", "Marco", new DateTime(2003, 12, 27), listeTest);
+
+            Console.WriteLine(dossierTest.getNbJoursSoins());
+            Console.ReadKey();
         }
     }
 }
