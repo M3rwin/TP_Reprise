@@ -21,10 +21,11 @@ namespace TP_Reprise
             listeTest.Add(pres2);
             listeTest.Add(pres3);
             listeTest.Add(pres4);
+            listeTest.Add(pres5);
 
             Dossier dossierTest = new Dossier("Clin", "Marco", new DateTime(2003, 12, 27), listeTest);
 
-            Console.WriteLine(dossierTest.getNbJoursSoins());
+            Console.WriteLine(dossierTest.getNbJoursSoinsV2());
             Console.ReadKey();
         }
     }

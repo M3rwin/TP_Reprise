@@ -39,29 +39,42 @@ namespace TP_Reprise
         public DateTime DateNaissance { get => dateNaissance; set => dateNaissance = value; }
         public List<Prestation> ListePrestations { get => listePrestations; set => listePrestations = value; }
 
+        /// <summary>
+        /// Fonction retourant le nombres de jours
+        /// sur lesquelles se sont étalés les préstations
+        /// </summary>
+        /// <returns>int</returns>
         public int getNbJoursSoins()
         {
-            bool doublon = false;
-            List<Prestation> joursPresta = new List<Prestation>();
+            List<DateTime> joursPrestation = new List<DateTime>();
+            joursPrestation.Add(this.ListePrestations[0].DateHeureSoin);
 
-            foreach(Prestation presta in ListePrestations)
+            foreach(Prestation presta in this.ListePrestations)
             {
-                int i = 0;
-                while(!doublon && i < joursPresta.Count)
+                if (!joursPrestation.Contains(presta.DateHeureSoin))
                 {
-                    if (!presta.compareTo(joursPresta[i]))
+                    joursPrestation.Add(presta.DateHeureSoin);
+                }
+            }
+
+            return joursPrestation.Count;
+        }
+
+        public int getNbJoursSoinsV2()
+        {
+            int jours = this.ListePrestations.Count;
+            for(int i=0; i<ListePrestations.Count; i++)
+            {
+                for(int j=i+1; j<ListePrestations.Count-1; j++)
+                {
+                    if (ListePrestations[i].compareTo(ListePrestations[j]))
                     {
-                        doublon=true;
+                        jours--;
                     }
                 }
-                joursPresta.Add(presta);
             }
 
-            foreach(Prestation presta in joursPresta)
-            {
-                Console.WriteLine(presta.DateHeureSoin.Date);
-            }
-            return joursPresta.Count;
+            return jours;
         }
     }
 }
