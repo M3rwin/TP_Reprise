@@ -60,6 +60,7 @@ namespace TP_Reprise
             return joursPrestation.Count;
         }
 
+
         public int getNbJoursSoinsV2()
         {
             int jours = this.ListePrestations.Count;
@@ -75,6 +76,18 @@ namespace TP_Reprise
             }
 
             return jours;
+        }
+
+        public void AfficherDossier()
+        {
+            Console.WriteLine("-----Début Dossier-------------------");
+            Console.WriteLine($"Nom : {this.Nom}, Prénom : {this.Prenom}, Date de naissance : {this.DateNaissance}");
+            foreach(Prestation prestation in ListePrestations)
+            {
+                Console.WriteLine("\t");
+                prestation.AfficherPrestation();
+            }
+            Console.WriteLine("-----Fin Dossier----------------------");
         }
     }
 }
