@@ -78,16 +78,31 @@ namespace TP_Reprise
             return jours;
         }
 
+        public int getNbSoinsExternes()
+        {
+            int compteur = 0;
+            foreach(Prestation presta in ListePrestations)
+            {
+                if(presta.Intervenant is IntervenantExterne)
+                {
+                    compteur++;
+                }
+            }
+            return compteur;
+        }
+
         public void AfficherDossier()
         {
             Console.WriteLine("-----Début Dossier-------------------");
             Console.WriteLine($"Nom : {this.Nom}, Prénom : {this.Prenom}, Date de naissance : {this.DateNaissance}");
             foreach(Prestation prestation in ListePrestations)
             {
-                Console.WriteLine("\t");
                 prestation.AfficherPrestation();
             }
             Console.WriteLine("-----Fin Dossier----------------------");
+            Console.WriteLine($@"Nombre de jours de soins V1 : {getNbJoursSoins()}");
+            Console.WriteLine($@"Nombre de jours de soins V2 : {getNbJoursSoinsV2()}");
+            Console.WriteLine($@"Nombre de soins externes : {getNbSoinsExternes()}");
         }
     }
 }

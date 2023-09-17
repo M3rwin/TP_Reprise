@@ -15,7 +15,7 @@ namespace TP_Reprise
             Prestation pres2 = new Prestation("test2", new DateTime(2023, 06, 12), new Intervenant("Clin", "Marco"));
             Prestation pres3 = new Prestation("test3", new DateTime(2023, 06, 13), new Intervenant("Clin", "Marco"));
             Prestation pres4 = new Prestation("test2", new DateTime(2023, 06, 12), new Intervenant("Clin", "Marco"));
-            Prestation pres5 = new Prestation("test3", new DateTime(2023, 06, 13), new Intervenant("Clin", "Marco"));
+            Prestation pres5 = new Prestation("test3", new DateTime(2023, 06, 13), new IntervenantExterne("Clin", "Marco", "Cardiologue", "26 impasse des genêts", 0776983272));
 
             listeTest.Add(pres1);
             listeTest.Add(pres2);

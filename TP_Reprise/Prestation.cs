@@ -30,7 +30,16 @@ namespace TP_Reprise
 
         public void AfficherPrestation()
         {
-            Console.WriteLine($@" Libellé : {this.Libelle} - {this.DateHeureSoin} - Intervenant : {this.Intervenant.Nom} - {this.Intervenant.Prenom}");
+            if(this.Intervenant is IntervenantExterne)
+            {
+                IntervenantExterne intervenantExterne = (IntervenantExterne)Intervenant;
+                Console.WriteLine($"\tLibellé : {this.Libelle} - {this.DateHeureSoin} - Intervenant : {intervenantExterne.Nom} - {intervenantExterne.Prenom} - Spécialité : {intervenantExterne.Specialite}\n\t\t{intervenantExterne.Adresse} - {intervenantExterne.Tel}");
+            }
+            else
+            {
+                Console.WriteLine($"\tLibellé : {this.Libelle} - {this.DateHeureSoin} - Intervenant : {this.Intervenant.Nom} - {this.Intervenant.Prenom}");
+            }
+            
         }
 
     }
