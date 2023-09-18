@@ -16,7 +16,7 @@ namespace TP_Reprise
         public SoinsException(string message)
             :base("Erreur de : " + System.Environment.UserName + " le " + DateTime.Now.ToLocalTime() + "\n" + message)
         {
-            StreamWriter sw = new StreamWriter(fileName);
+            StreamWriter sw = new StreamWriter(fileName, true);
             sw.WriteLine("Erreur de : " + System.Environment.UserName + " le " + DateTime.Now.ToLocalTime());
             sw.WriteLine(message);
             sw.Close();
