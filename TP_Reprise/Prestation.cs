@@ -17,15 +17,41 @@ namespace TP_Reprise
             this.libelle = libelle;
             this.dateHeureSoin = dateHeureSoin;
             this.intervenant = intervenant;
+            intervenant.ListePrestations.Add(this);
         }
 
         public string Libelle { get => libelle; set => libelle = value; }
         public DateTime DateHeureSoin { get => dateHeureSoin; set => dateHeureSoin = value; }
         internal Intervenant Intervenant { get => intervenant; set => intervenant = value; }
 
-        public bool compareTo(Prestation prestation)
+        public int compareTo(Prestation prestation)
         {
-            return this.DateHeureSoin.Date == prestation.DateHeureSoin.Date;
+            if(this.DateHeureSoin.Date < prestation.DateHeureSoin.Date)
+            {
+                return -1;
+            }else if(this.DateHeureSoin.Date == prestation.DateHeureSoin.Date)
+            {
+                return 0;
+            }else
+            {
+                return 1;
+            }
+        }
+
+        public int compareTo(DateTime date)
+        {
+            if (this.DateHeureSoin.Date < date.Date)
+            {
+                return -1;
+            }
+            else if (this.DateHeureSoin.Date == date.Date)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
         }
 
         public void AfficherPrestation()

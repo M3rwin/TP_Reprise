@@ -12,32 +12,44 @@ namespace TP_Reprise
         private string prenom;
         private DateTime dateNaissance;
         private List<Prestation> listePrestations = new List<Prestation>();
+        private readonly DateTime dateCreation = DateTime.Today;
 
         public Dossier(string nom, string prenom, DateTime dateNaissance)
         {
             this.nom = nom;
             this.prenom = prenom;
-            this.dateNaissance = dateNaissance;
+            this.DateNaissance = dateNaissance;
         }
         public Dossier(string nom, string prenom, DateTime dateNaissance, Prestation prestation)
+            :this(nom, prenom, dateNaissance)
         {
-            this.nom = nom;
-            this.prenom = prenom;
-            this.dateNaissance = dateNaissance;
             this.listePrestations.Add(prestation);
         }
         public Dossier(string nom, string prenom, DateTime dateNaissance, List<Prestation> prestations)
+            : this(nom, prenom, dateNaissance)
         {
-            this.nom = nom;
-            this.prenom = prenom;
-            this.dateNaissance = dateNaissance;
             this.listePrestations.AddRange(prestations);
         }
 
         public string Nom { get => nom; set => nom = value; }
         public string Prenom { get => prenom; set => prenom = value; }
-        public DateTime DateNaissance { get => dateNaissance; set => dateNaissance = value; }
+        public DateTime DateNaissance {
+            get => dateNaissance;
+            set
+            {
+                if(DateTime.Compare(value, DateTime.Today) > 0)
+                {
+                    dateNaissance = DateTime.Today;
+                    throw new SoinsException("La date n'est pas encore passée");                   
+                }
+                else
+                {
+                    dateNaissance = value;
+                }
+            }
+        }
         public List<Prestation> ListePrestations { get => listePrestations; set => listePrestations = value; }
+        public DateTime DateCreation => dateCreation;
 
         /// <summary>
         /// Fonction retourant le nombres de jours
@@ -68,7 +80,7 @@ namespace TP_Reprise
             {
                 for(int j=i+1; j<ListePrestations.Count-1; j++)
                 {
-                    if (ListePrestations[i].compareTo(ListePrestations[j]))
+                    if (ListePrestations[i].compareTo(ListePrestations[j])==0)
                     {
                         jours--;
                     }
@@ -103,6 +115,15 @@ namespace TP_Reprise
             Console.WriteLine($@"Nombre de jours de soins V1 : {getNbJoursSoins()}");
             Console.WriteLine($@"Nombre de jours de soins V2 : {getNbJoursSoinsV2()}");
             Console.WriteLine($@"Nombre de soins externes : {getNbSoinsExternes()}");
+        }
+
+        public void AjouterPrestation(Prestation presta)
+        {
+            if (presta.compareTo(this.DateCreation) == 0 || presta.compareTo(this.DateCreation) == 1 )
+            {
+                this.ListePrestations.Add(presta);
+            }
+            else { throw new SoinsException("Impossible : Date ultérieur à la création du dossier"); }
         }
     }
 }
